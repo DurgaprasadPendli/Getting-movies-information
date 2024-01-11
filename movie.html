@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style>
+        .movie-container {
+            display: flex;
+            width: 100%;
+            text-align: center;
+            color: blue;
+        }
+        .movie-card {
+            border-radius: 10px;
+            box-shadow: 10px 10px 13px #fff;
+            padding: 30px;
+        }
+        .image-container {
+            width: 350px;
+            height: 220px;
+            text-align: center;
+            color: blue;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <label for="startDate">Start Date:</label>
+        <input id="startDate" type="date" />
+        <label for="endDate">End Date:</label>
+        <input id="endDate" type="date" />
+        <button type="submit" onclick="dateSubmit()">Submit</button>
+    </div>
+    <div id="showMovie"></div>
+    <script>
+        const Predict = [
+            {
+               
+               
+                image: "movie_image.jpg",
+                rating: "6.9",
+                name: "Indian Jones and Dial of Destiny",
+                message: "2023 2h 34m",
+                date: "2023-06-02"
+            },   
+            {
+                date: "2023-07-04",
+                name: "No Hard Feelings",
+                image: "nohard feelings.avif",
+                message: "2023 2h 43m",
+               
+                rating: "6.8"
+            },
+            {
+                date: "2023-04-16",
+                name: "Asteroid City",
+                image: "asteriodcity.jpg.webp",
+                message: "2023 1h 45m",
+                
+                rating: "7.1"
+            },
+            {
+                date: "2023-06-16",
+                name: "The Flash",
+                image: "theflash_movie.jpj.jpg",
+                message: "2023 2h 24m",
+                rating: "7.2"
+                
+                
+            }
+            // Add more movie data as needed
+        ];
+
+
+        function dateSubmit() {
+            const startDate = document.getElementById("startDate").value;
+            const endDate = document.getElementById("endDate").value;
+
+
+            if (startDate && endDate) {
+                const selectedMovies = Predict.filter((movie) => movie.date >= startDate && movie.date <= endDate);
+                displayMovies(selectedMovies);
+            } else {
+                alert("Please select valid start and end dates");
+            }
+        }
+
+
+        function displayMovies(movies) {
+            const outputContainer = document.getElementById("showMovie");
+            outputContainer.innerHTML = "";
+
+
+            
+
+
+            const container = document.createElement("div");
+            container.classList.add("movie-container");
+
+
+            movies.forEach((movie) => {
+                const cardContainer = document.createElement("div");
+                cardContainer.classList.add("movie-card");
+
+
+                const nameEle = document.createElement("h2");
+                nameEle.textContent = `${movie.name}`;
+
+
+                const dateEle = document.createElement("p");
+                dateEle.textContent = `    ${movie.date}`;
+
+
+                const imgEle = document.createElement("img");
+                imgEle.classList.add("image-container");
+                imgEle.src = movie.image;
+                imgEle.alt = "Movie Poster";
+
+
+                const messageEle = document.createElement("p");
+                messageEle.textContent = `   ${movie.message}`;
+
+
+                const ratingEle = document.createElement("p");
+                ratingEle.textContent = `  ${movie.rating}`;
+
+              
+                cardContainer.appendChild(imgEle);
+                cardContainer.appendChild(ratingEle);
+                cardContainer.appendChild(nameEle);
+                cardContainer.appendChild(messageEle);
+                cardContainer.appendChild(dateEle);
+               
+               
+               
+                
+
+
+                container.appendChild(cardContainer);
+            });
+
+
+            
+            outputContainer.appendChild(container);
+        }
+    </script>
+</body>
+</html>
